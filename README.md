@@ -1,12 +1,12 @@
 # DJSRH
+> Unofficial Python3 Edition
 ***********************************************************************************************************
 
 This repository is for ["Deep Joint-Semantics Reconstructing Hashing for Large-Scale Unsupervised Cross-Modal Retrieval"](http://openaccess.thecvf.com/content_ICCV_2019/papers/Su_Deep_Joint-Semantics_Reconstructing_Hashing_for_Large-Scale_Unsupervised_Cross-Modal_Retrieval_ICCV_2019_paper.pdf) 
 
-(to appear in ICCV 2019, Oral)
+(ICCV 2019, Oral)
 
 By Shupeng Su\*, [Zhisheng Zhong](https://zzs1994.github.io)\*, Chao Zhang (\* Authors contributed equally).
-
 
 ***********************************************************************************************************
 ## Table of contents
@@ -26,25 +26,20 @@ Cross-modal hashing encodes the multimedia data into a common binary hash space 
 
 ## Usage
 ### Requirements
-- python == 2.7.x
-- pytorch == 0.3.1
-- torchvision
-- CV2
-- PIL
-- h5py
+see `env.yaml`
 
 ### Datasets
-You can download dataset from:
+For datasets, we follow [Deep Cross-Modal Hashing's Github (Jiang, CVPR 2017)](https://github.com/jiangqy/DCMH-CVPR2017/tree/master/DCMH_matlab/DCMH_matlab). You can download these datasets from:
 - Wikipedia articles, [Link](http://www.svcl.ucsd.edu/projects/crossmodal/)
-- MIRFLICKR25K, [Baidu Pan Link](https://pan.baidu.com/s/1o5jSliFjAezBavyBOiJxew), password: 8dub
-- NUS-WIDE (top-10 concept), [Baidu Pan Link](https://pan.baidu.com/s/1GFljcAtWDQFDVhgx6Jv_nQ), password: ml4y
+- MIRFLICKR25K, [[OneDrive](https://pkueducn-my.sharepoint.com/:f:/g/personal/zszhong_pku_edu_cn/EpLD8yNN2lhIpBgQ7Kl8LKABzM68icvJJahchO7pYNPV1g?e=IYoeqn)], [[Baidu Pan](https://pan.baidu.com/s/1o5jSliFjAezBavyBOiJxew), password: 8dub]
+- NUS-WIDE (top-10 concept), [[OneDrive](https://pkueducn-my.sharepoint.com/:f:/g/personal/zszhong_pku_edu_cn/EoPpgpDlPR1OqK-ywrrYiN0By6fdnBvY4YoyaBV5i5IvFQ?e=kja8Kj)], [[Baidu Pan](https://pan.baidu.com/s/1GFljcAtWDQFDVhgx6Jv_nQ), password: ml4y]
 
 
 ### Process
 
 __The following experiment results are the average values, if you demand for better results, please run the experiment a few more times (2~5).__
 
-- Clone this repo: `git clone https://github.com/zzs1994/DJSRH.git`.
+- Clone this repo: `git clone https://github.com/idejie/DJSRH3.git`.
 - Change the 'DATASET_DIR' in `settings.py` to where you place the datasets.
 - An example to train a model:
 ```bash
