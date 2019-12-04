@@ -10,10 +10,10 @@ DATASET = 'MIRFlickr'
 
 if DATASET == 'WIKI':
 
-    DATA_DIR = 'path/to/wiki/images'
-    LABEL_DIR = 'path/to/wiki/raw_features.mat'
-    TRAIN_LABEL = 'path/to/wiki/trainset_txt_img_cat.list'
-    TEST_LABEL = 'path/to/wiki/testset_txt_img_cat.list'
+    DATA_DIR = './data/wiki/images'
+    LABEL_DIR = './data/wiki/raw_features.mat'
+    TRAIN_LABEL = './data/wiki/trainset_txt_img_cat.list'
+    TEST_LABEL = './data/wiki/testset_txt_img_cat.list'
 
     BETA = 0.3
     LAMBDA1 = 0.3
@@ -21,28 +21,28 @@ if DATASET == 'WIKI':
     NUM_EPOCH = 200
     LR_IMG = 0.01
     LR_TXT = 0.01
-    EVAL_INTERVAL = 100
+    EVAL_INTERVAL = 10
 
 
 if DATASET == 'MIRFlickr':
 
-    LABEL_DIR = 'path/to/mirflickr/mirflickr25k-lall.mat'
-    TXT_DIR = 'path/to/mirflickr/mirflickr25k-yall.mat'
-    IMG_DIR = 'path/to/mirflickr/mirflickr25k-iall.mat'
+    LABEL_DIR = './data/mirflickr/mirflickr25k-lall.mat'
+    TXT_DIR = './data/mirflickr/mirflickr25k-yall.mat'
+    IMG_DIR = './data/mirflickr/mirflickr25k-iall.mat'
     
     BETA = 0.9
     LAMBDA1 = 0.1
     LAMBDA2 = 0.1
-    NUM_EPOCH = 80
+    NUM_EPOCH = 200
     LR_IMG = 0.001
     LR_TXT = 0.01
-    EVAL_INTERVAL = 40
+    EVAL_INTERVAL = 5
 
 if DATASET == 'NUSWIDE':
 
-    LABEL_DIR = 'path/to/NUS-WIDE-TC10/nus-wide-tc10-lall.mat'
-    TXT_DIR = 'path/to/NUS-WIDE-TC10/nus-wide-tc10-yall.mat'
-    IMG_DIR = 'path/to/NUS-WIDE-TC10/IAll/nus-wide-tc10-iall.mat'
+    LABEL_DIR = './data/NUS-WIDE-TC10/nus-wide-tc10-lall.mat'
+    TXT_DIR = './data/NUS-WIDE-TC10/nus-wide-tc10-yall.mat'
+    IMG_DIR = './data/NUS-WIDE-TC10/IAll/nus-wide-tc10-iall.mat'
 
     BETA = 0.6
     LAMBDA1 = 0.1
@@ -50,7 +50,7 @@ if DATASET == 'NUSWIDE':
     NUM_EPOCH = 80
     LR_IMG = 0.001
     LR_TXT = 0.01
-    EVAL_INTERVAL = 40
+    EVAL_INTERVAL = 5
 
 
 BATCH_SIZE = 32

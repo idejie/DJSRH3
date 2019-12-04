@@ -13,32 +13,34 @@ class ImgNet(nn.Module):
         self.fc_encode = nn.Linear(4096, code_len)
         self.alpha = 1.0
 
-
     def forward(self, x):
         x = self.alexnet.features(x)
         x = x.view(x.size(0), -1)
         feat = self.alexnet.classifier(x)
         hid = self.fc_encode(feat)
-        code = F.tanh(self.alpha * hid)
+        code = torch.tanh(self.alpha * hid)
 
         return feat, hid, code
 
     def set_alpha(self, epoch):
-        self.alpha  = math.pow((1.0 * epoch + 1.0), 0.5)
+        self.alpha = math.pow((1.0 * epoch + 1.0), 0.5)
 
 
 class TxtNet(nn.Module):
     def __init__(self, code_len, txt_feat_len):
         super(TxtNet, self).__init__()
         self.fc1 = nn.Linear(txt_feat_len, 4096)
+        self.fc_t = nn.Linear(4096, 4096)
         self.fc2 = nn.Linear(4096, code_len)
         self.alpha = 1.0
 
     def forward(self, x):
-        feat = F.relu(self.fc1(x))
+        feat = self.fc1(x)
+        feat = self.fc_t(feat)
+        feat = F.relu(feat)
         hid = self.fc2(feat)
-        code = F.tanh(self.alpha * hid)
+        code = torch.tanh(self.alpha * hid)
         return feat, hid, code
 
     def set_alpha(self, epoch):
-        self.alpha  = math.pow((1.0 * epoch + 1.0), 0.5)
+        self.alpha = math.pow((1.0 * epoch + 1.0), 0.5)

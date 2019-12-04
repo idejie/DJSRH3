@@ -1,6 +1,5 @@
 import torch
-import cv2
-import scipy.io as scio
+# import cv2
 from PIL import Image
 import settings
 import numpy as np
@@ -80,9 +79,7 @@ if settings.DATASET == "WIKI":
             """
             
             path = self.root + '/' + self.f_name[self.label[index]] + '/' + self.img_name[index] + '.jpg'
-            img = cv2.imread(path)
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            img = Image.fromarray(img)
+            img = Image.open(path).convert('RGB')
             target = self.label[index]
             txt = self.txt[index]
 
