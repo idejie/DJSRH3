@@ -129,33 +129,33 @@ def calculate_map(qu_B, re_B, qu_L, re_L):
     return map
 
 
-# def calculate_top_map(qu_B, re_B, qu_L, re_L, topk):
-#     """
-#     :param qu_B: {-1,+1}^{mxq} query bits
-#     :param re_B: {-1,+1}^{nxq} retrieval bits
-#     :param qu_L: {0,1}^{mxl} query label
-#     :param re_L: {0,1}^{nxl} retrieval label
-#     :param topk:
-#     :return:
-#     """
-#     num_query = qu_L.shape[0]
-#     topkmap = 0
-#     for iter in range(num_query):
-#         gnd = (np.dot(qu_L[iter, :], re_L.transpose()) > 0).astype(np.float32)
-#         hamm = calculate_hamming(qu_B[iter, :], re_B)
-#         ind = np.argsort(hamm)
-#         gnd = gnd[ind]
-#
-#         tgnd = gnd[0:topk]
-#         tsum = np.sum(tgnd)
-#         if tsum == 0:
-#             continue
-#         count = np.linspace(1, tsum, tsum)
-#         tindex = np.asarray(np.where(tgnd == 1)) + 1.0
-#         topkmap_ = np.mean(count / (tindex))
-#         topkmap = topkmap + topkmap_
-#     topkmap = topkmap / num_query
-#     return topkmap
+def calculate_top_map(qu_B, re_B, qu_L, re_L, topk):
+    """
+    :param qu_B: {-1,+1}^{mxq} query bits
+    :param re_B: {-1,+1}^{nxq} retrieval bits
+    :param qu_L: {0,1}^{mxl} query label
+    :param re_L: {0,1}^{nxl} retrieval label
+    :param topk:
+    :return:
+    """
+    num_query = qu_L.shape[0]
+    topkmap = 0
+    for iter in range(num_query):
+        gnd = (np.dot(qu_L[iter, :], re_L.transpose()) > 0).astype(np.float32)
+        hamm = calculate_hamming(qu_B[iter, :], re_B)
+        ind = np.argsort(hamm)
+        gnd = gnd[ind]
+
+        tgnd = gnd[0:topk]
+        tsum = np.sum(tgnd)
+        if tsum == 0:
+            continue
+        count = np.linspace(1, tsum, tsum)
+        tindex = np.asarray(np.where(tgnd == 1)) + 1.0
+        topkmap_ = np.mean(count / (tindex))
+        topkmap = topkmap + topkmap_
+    topkmap = topkmap / num_query
+    return topkmap
 def calc_map_k(qB, rB, query_L, retrieval_L, k=None):
     # qB: {-1,+1}^{mxq}
     # rB: {-1,+1}^{nxq}

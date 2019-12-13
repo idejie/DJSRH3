@@ -8,31 +8,32 @@ EVAL = False
 # dataset can be 'WIKI', 'MIRFlickr' or 'NUSWIDE'
 DATASET = 'MIRFlickr'
 
-if DATASET == 'WIKI':
+DATASET = 'MIRFlickr'
 
-    DATA_DIR = './data/wiki/images'
-    LABEL_DIR = './data/wiki/raw_features.mat'
-    TRAIN_LABEL = './data/wiki/trainset_txt_img_cat.list'
-    TEST_LABEL = './data/wiki/testset_txt_img_cat.list'
+if DATASET == 'WIKI':
+    DATA_DIR = '/home/dejie/data/DJSRH/wiki/images'
+    LABEL_DIR = '/home/dejie/data/DJSRH/wiki/raw_features.mat'
+    TRAIN_LABEL = '/home/dejie/data/DJSRH/wiki/trainset_txt_img_cat.list'
+    TEST_LABEL = '/home/dejie/data/DJSRH/wiki/testset_txt_img_cat.list'
 
     BETA = 0.3
     LAMBDA1 = 0.3
     LAMBDA2 = 0.3
+    THETA = 2
     NUM_EPOCH = 200
     LR_IMG = 0.01
     LR_TXT = 0.01
-    EVAL_INTERVAL = 10
-
+    EVAL_INTERVAL = 5
 
 if DATASET == 'MIRFlickr':
+    LABEL_DIR = '/home/dejie/data/DJSRH/f25k/mirflickr25k-lall.mat'
+    TXT_DIR = '/home/dejie/data/DJSRH/f25k/mirflickr25k-yall.mat'
+    IMG_DIR = '/home/dejie/data/DJSRH/f25k/mirflickr25k-iall.mat'
 
-    LABEL_DIR = './data/mirflickr/mirflickr25k-lall.mat'
-    TXT_DIR = './data/mirflickr/mirflickr25k-yall.mat'
-    IMG_DIR = './data/mirflickr/mirflickr25k-iall.mat'
-    
     BETA = 0.9
     LAMBDA1 = 0.1
     LAMBDA2 = 0.1
+    THETA = 2
     NUM_EPOCH = 200
     LR_IMG = 0.001
     LR_TXT = 0.01
