@@ -94,7 +94,8 @@ class Session:
             self.opt_T.zero_grad()
 
             F_I, _, _ = self.FeatNet_I(img)
-            F_T, _, _ = self.FeatNet_T(txt)
+            F_T = txt
+            # F_T, _, _ = self.FeatNet_T(txt)
             _, hid_I, code_I = self.CodeNet_I(img)
             _, hid_T, code_T = self.CodeNet_T(txt)
 
@@ -112,29 +113,29 @@ class Session:
             BI_BI = B_I.mm(B_I.t())
             BT_BT = B_T.mm(B_T.t())
             BI_BT = B_I.mm(B_T.t())
-            BT_BI = B_T.mm(B_I.t())
+            # BT_BI = B_T.mm(B_I.t())
 
             S_tilde = settings.BETA * S_I + (1 - settings.BETA) * S_T
-            # S_tilde = (1 - settings.ETA) * S_tilde + settings.ETA * S_tilde.mm(S_tilde) / settings.BATCH_SIZE
+            S_tilde = (1 - settings.ETA) * S_tilde + settings.ETA * S_tilde.mm(S_tilde) / settings.BATCH_SIZE
             # S_tilde = (1 - settings.ETA) * S_tilde + settings.ETA * S_tilde.mm(S_tilde) / settings.BATCH_SIZE
             S = S_tilde * settings.MU
 
             loss1 = F.mse_loss(BI_BI, S)
             loss2 = F.mse_loss(BI_BT, S)
             loss3 = F.mse_loss(BT_BT, S)
-            loss4 = F.mse_loss(BT_BI, S)
-            loss = settings.LAMBDA1 * loss1 + 1 * loss2 + settings.LAMBDA2 * (loss3 + loss4)
+            # loss4 = F.mse_loss(BT_BI, S)
+            loss = settings.LAMBDA1 * loss1 + 1 * loss2 + settings.LAMBDA2 * loss3
 
             loss.backward()
             self.opt_I.step()
             self.opt_T.step()
             if (idx + 1) % (len(self.train_dataset) // settings.BATCH_SIZE / settings.EPOCH_INTERVAL) == 0:
                 self.logger.info(
-                    'Epoch [%d/%d], Iter [%d/%d] Loss1: %.4f Loss2: %.4f Loss3: %.4f Loss3: %.4f Total Loss: %.4f'
+                    'Epoch [%d/%d], Iter [%d/%d] Loss1: %.4f Loss2: %.4f Loss3: %.4f Total Loss: %.4f'
                     % (
                         epoch + 1, settings.NUM_EPOCH, idx + 1,
                         len(self.train_dataset) // settings.BATCH_SIZE,
-                        loss1.item(), loss2.item(), loss3.item(), loss4.item(), loss.item()))
+                        loss1.item(), loss2.item(), loss3.item(), loss.item()))
 
     def eval(self):
         self.logger.info('--------------------Evaluation: Calculate top MAP-------------------')
